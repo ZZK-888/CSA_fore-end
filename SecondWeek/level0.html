@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个js代码</title>
+</head>
+<script>
+    //使用Object()函数创建
+    let obj = new Object();
+    obj.name = "zzk";
+    obj.age = "20";
+    console.log(obj);
+
+    //使用对象字面量创建
+
+    let obj1 = {
+        name: 'zzk',
+        age: '22',
+        Sno: '2021212202',
+        gander: 'man'
+    }
+    console.log(obj1);
+
+    //使用构造函数创建
+    function Human() {
+        this.name = 'zzk';
+        this.age = '20';
+        this.gander = 'man';
+    }
+    let kk = new Human();
+    console.log(kk);
+</script>
+
+<body>
+
+</body>
+
+</html>
