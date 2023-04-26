@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deepClone</title>
+</head>
+
+<body>
+    <script>
+        //深拷贝，递归每层引用类型，遇数组/对象，创建一个新的，复制基础值。
+        let Old = {
+            name: 'zzk',
+            age: 20,
+            family: ['zzm', 'zzr', 'wqr', 'zqb', 'wlc'],
+            obj: {
+                name: 'zzb',
+                age: 30
+            }
+        }
+        /*let Oneobj={
+            name:'one'
+        }*/
+        //Oneobj.a = Old;
+        let New = {};
+        function deepClone(New, Old/*,map*/)
+            /* if (!map) {
+             map = new Map()
+         }*/ {
+            for (let key in Old) {
+                let value = Old[key];
+                if (value instanceof Array) {
+                    New[key] = [];
+                    deepClone(New[key], value);
+                }
+                else if (value instanceof Object) {
+                    New[key] = {};
+                    deepClone(New[key], value);
+                    /*if(!map.has(value))
+                    {
+                        map.set(value,1)
+                        deepClone(New[key],value,map)
+                    }*/
+                }
+                else {
+                    New[key] = value;
+                }
+            }
+        }
+        deepClone(New, Old);
+        Old.family.push('cxk');
+        console.log(New);//拷贝成功，没被影响。
+        //深拷贝还有一个循环引用的bug，用ES6：Map集合来解决,Map对象key可以是任意类型（数组，对象）;
+    </script>
+</body>
+
+</html>

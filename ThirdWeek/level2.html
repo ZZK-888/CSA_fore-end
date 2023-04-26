@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浅拷贝</title>
+</head>
+
+<body>
+    <script>
+        //实现一个简单对象的浅拷贝
+        let obj = {
+            name: 'zzk',
+            age: 20,
+            family: [5, 8, 7, 6]//数组的拷贝
+        }
+        obj1 = {};
+        for (let key in obj) {
+            obj1[key] = obj[key];
+        }
+        obj.family.push(888);
+        console.log(obj1.family);//[5,8,7,6,888]浅拷贝只是拷贝第一层的值，第二层相互引用。
+
+        //拷贝方法2
+        let obj2 = { ...obj };
+        obj.age = 200;
+        console.log(obj2.age);//20
+
+        //way 3
+        let obj3 = Object.assign({}, obj);
+        obj.name = 'cqf';
+        console.log(obj3.name);//zzk
+        //拷贝过来之后原对象的改变没有影响新对象。
+    </script>
+</body>
+
+</html>

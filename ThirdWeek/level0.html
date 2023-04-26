@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值</title>
+</head>
+
+<body>
+    <script>
+        const person = {
+            name: 'csa',
+            age: 1000000,
+            address: {
+                city: 'ChongQing',
+                area: 'NanShan'
+            },
+            title: ['student', { year: 2021, title: 'GoodStudent' }]
+        }
+
+        //解构，对小白来说真的很花里胡哨，脑子爆炸啦。
+        const { name, age: year, address: { city, area: mountain }, title: [title1, { title: title2 }] } = person;
+        const title3 = title2[0] + title2[1] + title2[3];
+        console.log(name) // csa
+        console.log(year) // 1000000 这里没有写错哈，就是要输出 1000000，结合课件
+        console.log(city) // ChongQing 
+        console.log(mountain) // NanShan //这里没有写错，就是要输出 NanShan，结合课件
+        console.log(title1) // student
+        console.log(title2) // GoodStudent
+        console.log(title3) // God 结合课件
+
+
+    </script>
+</body>
+
+</html>
