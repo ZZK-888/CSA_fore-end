@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+
+            speak() {
+                console.log(`My name is ${this.name}, I'm ${this.age} years old.`)
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, age, courses) {
+                super(name, age)
+                this.courses = courses
+            }
+
+            speak() {
+                super.speak()
+                console.log(`I'm a student and I'm taking ${this.courses.length} courses: ${this.courses.join(', ')}.`)
+            }
+        }
+
+        const person = new Person('Mike', 20)
+        person.speak() // 输出：My name is Mike, I'm 20 years old.
+
+        const student = new Student('Lucy', 18, ['Math', 'Science', 'English'])
+        student.speak()
+// 输出：
+// My name is Lucy, I'm 18 years old.
+// I'm a student and I'm taking 3 courses: Math, Science, English.
+    </script>
+</body>
+
+</html>
