@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>小球移动动画</title>
+    <style>
+        /* 定义小球的样式 */
+        .blue {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(65, 118, 209);
+            position: absolute;
+            top: 200px;
+            transform: translateY(-50%);
+        }
+
+        .orange {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: orange;
+            position: absolute;
+            top: 250px;
+            transform: translateY(-50%);
+        }
+
+        .gray {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: gray;
+            position: absolute;
+            top: 300px;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 在页面中添加一个小球元素 -->
+    <div class="blue"></div>
+    <div class="orange"></div>
+    <div class="gray"></div>
+
+    <script>
+        //1、使用嵌套的 setTimeout()。
+        // 获取小球元素
+        const ball1 = document.querySelector('.blue');
+        const ball2 = document.querySelector('.orange');
+        const ball3 = document.querySelector('.gray');
+
+        // 设置初始位置和速度
+        let left1 = 0;
+        let left2 = 0;
+        let left3 = 0;
+        let speed = 5;
+
+        // 移动第一个小球
+        function moveBall1() {
+            left1 += speed;
+            ball1.style.left = `${left1}px`;
+            if (left1 < window.innerWidth - ball1.offsetWidth) {
+                setTimeout(moveBall1, 10);
+            } else {
+                setTimeout(moveBall2, 10);
+            }
+        }
+
+        // 移动第二个小球
+        function moveBall2() {
+            left2 += speed;
+            ball2.style.left = `${left2}px`;
+            if (left2 < window.innerWidth - ball2.offsetWidth) {
+                setTimeout(moveBall2, 10);
+            } else {
+                setTimeout(moveBall3, 10);
+            }
+        }
+
+        // 移动第三个小球
+        function moveBall3() {
+            left3 += speed;
+            ball3.style.left = `${left3}px`;
+            if (left3 < window.innerWidth - ball3.offsetWidth) {
+                setTimeout(moveBall3, 10);
+            }
+        }
+
+        // 开始移动
+        setTimeout(moveBall1, 10);
+
+    </script>
+</body>
+
+</html>

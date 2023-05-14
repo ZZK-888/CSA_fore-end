@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>小球移动动画</title>
+    <style>
+        /* 定义小球的样式 */
+        .blue {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(65, 118, 209);
+            position: absolute;
+            top: 200px;
+            transform: translateY(-50%);
+        }
+
+        .orange {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: orange;
+            position: absolute;
+            top: 250px;
+            transform: translateY(-50%);
+        }
+
+        .gray {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: gray;
+            position: absolute;
+            top: 300px;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 在页面中添加一个小球元素 -->
+    <div class="blue"></div>
+    <div class="orange"></div>
+    <div class="gray"></div>
+
+    <script>    //promise回调
+        // 获取小球元素
+        const ball1 = document.querySelector('.blue');
+        const ball2 = document.querySelector('.orange');
+        const ball3 = document.querySelector('.gray');
+
+        // 设置初始位置和速度
+        let left = 0;
+        let speed = 3;
+        let delay = 10;
+
+        // 移动小球
+        function moveBall(ball, distance) {
+            return new Promise((resolve) => {
+                const timer = setInterval(() => {
+                    left += speed;
+                    ball.style.left = `${left}px`;
+                    if (left >= distance) {
+                        clearInterval(timer);
+                        resolve();
+                    }
+                }, delay);
+            });
+        }
+
+        // 开始移动
+        moveBall(ball1, 1000)
+            .then(() => {
+                left = 0;
+                return moveBall(ball2, 1000);
+            })
+            .then(() => {
+                left = 0;
+                return moveBall(ball3, 1000);
+            });
+    </script>
+</body>
+
+</html>
