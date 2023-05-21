@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #calculator {
+            max-width: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .display {
+            padding: 10px;
+            background-color: #fff;
+            font-size: 24px;
+            text-align: right;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        button {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            background-color: #f4f4f4;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        button:active {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Calculator -->
+    <div id="calculator">
+        <div class="display">{{ display }}</div>
+        <div class="buttons">
+            <button v-for="button in buttons" :key="button.content" @click="handleButton(button)">{{ button.content
+                }}</button>
+        </div>
+    </div>
+    <script>// Vue实例
+        // Vue 实例
+        new Vue({
+            el: '#calculator',
+            data: {
+                display: '0',
+                prevValue: null,
+                operator: null,
+                buttons: [
+                    { content: 'C', type: 'clear' },
+                    { content: '±', type: 'sign' },
+                    { content: '%', type: 'percentage' },
+                    { content: '÷', type: 'operator' },
+                    { content: '7', type: 'number' },
+                    { content: '8', type: 'number' },
+                    { content: '9', type: 'number' },
+                    { content: '×', type: 'operator' },
+                    { content: '4', type: 'number' },
+                    { content: '5', type: 'number' },
+                    { content: '6', type: 'number' },
+                    { content: '-', type: 'operator' },
+                    { content: '1', type: 'number' },
+                    { content: '2', type: 'number' },
+                    { content: '3', type: 'number' },
+                    { content: '+', type: 'operator' },
+                    { content: '0', type: 'number' },
+                    { content: '.', type: 'decimal' },
+                    { content: '=', type: 'equal' }
+                ]
+            },
+            methods: {
+                handleButton(button) {
+                    switch (button.type) {
+                        case 'number':
+                            this.handleNumber(button);
+                            break;
+                        case 'operator':
+                            this.handleOperator(button);
+                            break;
+                        case 'decimal':
+                            this.handleDecimal(button);
+                            break;
+                        case 'equal':
+                            this.handleEqual(button);
+                            break;
+                        case 'clear':
+                            this.handleClear(button);
+                            break;
+                        case 'sign':
+                            this.handleSign(button);
+                            break;
+                        case 'percentage':
+                            this.handlePercentage(button);
+                            break;
+                        default:
+                            break;
+                    }
+                },
+                handleNumber(button) {
+                    if (this.display === '0') {
+                        this.display = button.content;
+                    } else {
+                        this.display += button.content;
+                    }
+                },
+                handleOperator(button) {
+                    this.prevValue = parseFloat(this.display);
+                    this.operator = button.content;
+                    this.display = '0';
+                },
+                handleDecimal(button) {
+                    if (this.display.indexOf('.') === -1) {
+                        this.display += button.content;
+                    }
+                },
+                handleEqual(button) {
+                    const currentValue = parseFloat(this.display);
+                    let newValue = 0;
+                    switch (this.operator) {
+                        case '÷':
+                            newValue = this.prevValue / currentValue;
+                            break;
+                        case '×':
+                            newValue = this.prevValue * currentValue;
+                            break;
+                        case '-':
+                            newValue = this.prevValue - currentValue;
+                            break;
+                        case '+':
+                            newValue = this.prevValue + currentValue;
+                            break;
+                        default:
+                            break;
+                    }
+                    this.prevValue = null;
+                    this.operator = null;
+                    this.display = newValue.toString();
+                },
+                handleClear(button) {
+                    this.display = '0';
+                },
+                handleSign(button) {
+                    this.display = (parseFloat(this.display) * -1).toString();
+                },
+                handlePercentage(button) {
+                    this.display = (parseFloat(this.display) / 100).toString();
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

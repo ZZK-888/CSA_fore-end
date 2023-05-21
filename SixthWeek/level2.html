@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新年倒计时</title>
+    <style>
+        #countdown {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .timer-col {
+            margin: 20px;
+        }
+
+        .timer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer span:first-child {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .timer span:last-child {
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Countdown Timer -->
+    <div id="countdown">
+        <div class="timer-col">
+            <div class="timer">
+                <span id="days"></span>
+                <span>days</span>
+            </div>
+        </div>
+        <div class="timer-col">
+            <div class="timer">
+                <span id="hours"></span>
+                <span>hours</span>
+            </div>
+        </div>
+        <div class="timer-col">
+            <div class="timer">
+                <span id="minutes"></span>
+                <span>minutes</span>
+            </div>
+        </div>
+        <div class="timer-col">
+            <div class="timer">
+                <span id="seconds"></span>
+                <span>seconds</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 计算时间差，并更新倒计时
+        function updateCountdown() {
+            const countDate = new Date("January 1, 2023 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = countDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.querySelector("#days").innerHTML = days;
+            document.querySelector("#hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.querySelector("#minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.querySelector("#seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+        }
+
+        // 每秒更新倒计时
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>

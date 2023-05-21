@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+    <style>
+        #app {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 8px;
+            margin-bottom: 5px;
+            background: #f4f4f4;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Todo List -->
+    <div id="app">
+        <h2>My To do List</h2>
+        <form @submit.prevent="addItem">
+            <input type="text" v-model="newItem" placeholder="Add item..." />
+            <button>Add</button>
+        </form>
+        <ul>
+            <li v-for="(item, index) in items" :key="index">
+                撒狗粮
+                <button @click="removeItem(index)">Remove</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        // Vue实例
+        new Vue({
+            el: '#app',
+            data: {
+                items: [],
+                newItem: ''
+            },
+            methods: {
+                addItem() {
+                    this.items.push(this.newItem);
+                    this.newItem = '';
+                },
+                removeItem(index) {
+                    this.items.splice(index, 1);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
